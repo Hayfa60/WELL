@@ -1,4 +1,9 @@
 #!/usr/bin/python
+from urllib.parse import urlparse
+import requests
+import json
+import math
+import re
 
 domain = ''
 domain_arr = []
