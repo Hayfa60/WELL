@@ -77,7 +77,7 @@ def parse_url(url):
 
 	# eliminate empty strings from list
 	domain_arr = filter(None, domain_arr)		
-	print 'DOMAIN             ==> ', domain
+	print('DOMAIN             ==> ', domain)
 
 	# separate path components into 'words'
 	if u and u.path:
@@ -85,9 +85,9 @@ def parse_url(url):
 		path_arr = re.split('[/_.-]', path)
 		# eliminate empty strings from list
 		path_arr = filter(None, path_arr)
-		print 'PATH               ==> ', path
+		print('PATH               ==> ', path)
 	else:
-		print 'PATH               ==> No path info in URL'
+		print('PATH               ==> No path info in URL')
 
 	# words[] is a list containing the terms to evaluate
 	words = domain_arr + path_arr
@@ -106,7 +106,7 @@ def main():
 	# read in pre-rendered json
 	with open('character_pair_probabilities.json') as fi:
 		j = json.load(fi)
-	print '-- Read json --'
+	print('-- Read json --')
 
 	# fetch latest icann TLD list
 	r = requests.get('http://data.iana.org/TLD/tlds-alpha-by-domain.txt')
@@ -114,7 +114,7 @@ def main():
 
 	# obtain tld's in array for comparison
 	tlds = arr2[1:]
-	print '-- Fetched latest ICANN TLDs --\n'
+	print('-- Fetched latest ICANN TLDs --\n')
 
 	# read url
 	with open(file_name, 'r') as fi:
@@ -126,9 +126,9 @@ def main():
 			path_arr = []
 
 			url = url.rstrip().lower()
-			print 'URL                ==> ', url
+			print('URL                ==> ', url)
 			words = parse_url(url)
-			print 'EVALUATING WORDS   ==> ', words
+			print('EVALUATING WORDS   ==> ', words)
 			
 			# calculate a score
 			for word in words:
@@ -137,8 +137,8 @@ def main():
 				# calculate exp(score/len(word)) rounded to 3 decimals
 				malware_score = round(math.exp(abs(score)/len(word)), 3)
 				if malware_score > 15:
-					print 'POSSIBLY MALICIOUS ==> ', word, malware_score			
-			print '\n'
+					print('POSSIBLY MALICIOUS ==> ', word, malware_score)			
+			print('\n')
 
 if __name__ == "__main__":
 	main()
