@@ -1,11 +1,5 @@
 #!/usr/bin/python
 
-from urlparse import urlparse
-import requests
-import json
-import math
-import re
-
 domain = ''
 domain_arr = []
 path=''
